@@ -15,7 +15,7 @@ abstract class AbstractReference
     /**
      * Constructor for the container argument.
      *
-     * @param string $serviceName The service name.
+     * @param string $name The service name.
      */
     public function __construct($name)
     {
