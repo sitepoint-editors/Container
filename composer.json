@@ -1,4 +1,17 @@
 {
+    "name": "sitepoint/container",
+    "description": "A simple, easy to follow PHP dependency injection container",
+    "type": "library",
+    "keywords": ["container", "dependency", "injection"],
+    "homepage": "https://github.com/sitepoint/Container",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Carter",
+            "homepage": "http://andrewcarteruk.github.io/",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "container-interop/container-interop": "^1.1"
     },
