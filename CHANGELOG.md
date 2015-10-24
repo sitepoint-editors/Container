@@ -9,5 +9,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Composer package file
 - Support for container-interop
 - README documentation
+- CHANGELOG
 - Git files (ignore, attributes)
 - Travis configuration file
