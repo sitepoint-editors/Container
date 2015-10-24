@@ -6,7 +6,7 @@
 
 A simple, easy to follow PHP dependency injection container. Designed to be forked, modified, extended and hacked.
 
-# How To Use
+## How to Use
 
 Although it isn't required to do so, a good practice is to split up the configuration for our container. In this example we'll use three files to create our container for the Monolog component.
 
