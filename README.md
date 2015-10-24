@@ -99,3 +99,11 @@ $logger = $container->get('logger');
 $logger->debug('This will be logged to the file');
 $logger->error('This will be logged to the file and the email');
 ```
+
+## Change Log
+
+This project maintains a [change log file](CHANGELOG.md)
+
+## License
+
+The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
