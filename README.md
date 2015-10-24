@@ -83,6 +83,7 @@ The container file just extracts the service and parameter definitions and passe
 
 ```PHP
 <?php // config/container.php
+
 use SitePoint\Container\Container;
 
 $services   = include __DIR__.'/services.php';
