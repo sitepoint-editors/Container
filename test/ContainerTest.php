@@ -147,7 +147,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException        SitePoint\Container\Exception\ContainerException
-     * @expectedExceptionMessage service calls must all contain a 'method' key
+     * @expectedExceptionMessage service calls must be arrays containing a 'method' key
      */
     public function testNoMethod()
     {
@@ -158,7 +158,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
                     'foo',
                 ],
                 'calls' => [
-                    ['bar'],
+                    [ 'foo' ],
                 ],
             ],
         ]);
@@ -179,9 +179,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
                     'foo',
                 ],
                 'calls' => [
-                    [
-                        'method' => 'LALALALALA',
-                    ],
+                    [ 'method' => 'LALALALALA' ],
                 ],
             ],
         ]);

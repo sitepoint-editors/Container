@@ -162,15 +162,15 @@ class Container
     /**
      * Initialize a service using the call definitions.
      *
-     * @param string $service         The service.
+     * @param object $service         The service.
      * @param string $name            The service name.
      * @param array  $callDefinitions The service calls definition.
      */
     private function initializeService($service, $name, $callDefinitions)
     {
         foreach ($callDefinitions as $callDefinition) {
-            if (!isset($callDefinition['method'])) {
-                throw new ContainerException($name.' service calls must all contain a \'method\' key');
+            if (!is_array($callDefinition) || !isset($callDefinition['method'])) {
+                throw new ContainerException($name.' service calls must be arrays containing a \'method\' key');
             } elseif (!is_callable([$service, $callDefinition['method']])) {
                 throw new ContainerException($name.' service asks for call to uncallable method: '.$callDefinition['method']);
             }
