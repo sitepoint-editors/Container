@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "SitePoint\\Container\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SitePoint\\Container\\Test\\": "test/"
+        }
+    }
+}
