@@ -1,12 +1,16 @@
 # Container
 
+[![Build Status](https://travis-ci.org/php-diy/container.svg?branch=master)](https://travis-ci.org/php-diy/container)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-diy/container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/php-diy/container/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/php-diy/container/badge.svg?branch=master&service=github)](https://coveralls.io/github/php-diy/container?branch=master)
+
 A simple, easy to follow PHP dependency injection container. Designed to be forked, modified, extended and hacked.
 
 # How To Use
 
 Although it isn't required to do so, a good practice is to split up the configuration for our container. In this example we'll use three files to create our container for the Monolog component.
 
-In the service definitions file, we define three services. The 'stream_handler' and 'mail_handler' services are created via constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The 'logger' service is instantiated via two calls to the 'pushHandler' method, each with a different handler service imported. 
+In the service definitions file, we define three services. The stream handler and mail handler services are created via constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The logger service is instantiated via two calls to the `pushHandler` method, each with a different handler service imported. 
 ```PHP
 // config/services.php
 
