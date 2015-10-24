@@ -64,12 +64,12 @@ class Container
         }
 
         // If we haven't created it, create it and save to store
-        if (!isset($this->servicesStore[$name])) {
-            $this->servicesStore[$name] = $this->createService($name);
+        if (!isset($this->serviceStore[$name])) {
+            $this->serviceStore[$name] = $this->createService($name);
         }
 
         // Return service from store
-        return $this->servicesStore[$name];
+        return $this->serviceStore[$name];
     }
 
     /**
