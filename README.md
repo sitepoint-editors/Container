@@ -12,9 +12,9 @@ A simple, easy to follow PHP dependency injection container. Designed to be fork
 
 Although it isn't required to do so, a good practice is to split up the configuration for our container. In this example we'll use three files to create our container for the Monolog component.
 
-In the service definitions file, we define three services. The stream handler and mail handler services are created via constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The logger service is instantiated via two calls to the `pushHandler` method, each with a different handler service imported. 
+In the service definitions file, we define three services. All of the services require constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The logger service also requires two calls to the `pushHandler` method, each with a different handler service imported. 
 ```PHP
-// config/services.php
+<?php // config/services.php
 
 // Value objects are used to reference parameters and services in the container
 use SitePoint\Container\Reference\ParameterReference;
@@ -31,7 +31,7 @@ return [
             new ParameterReference('logger.file'),
             Logger::DEBUG,
         ],
-    ]
+    ],
     'mail_handler' => [
         'class' => NativeMailerHandler::class,
         'arguments' => [
@@ -43,6 +43,7 @@ return [
     ],
     'logger' => [
         'class' => Logger::class,
+        'arguments' => [ 'channel-name' ],
         'calls' => [
             [
                 'method' => 'pushHandler',
@@ -64,11 +65,11 @@ return [
 The parameters definitions file just returns an array of values. These are defined as an N-dimensional array, but they are accessed through references using the notation: `'logger.file'` or `'logger.mail.to_address'`.
 
 ```PHP
-// config/parameters.php
+<?php // config/parameters.php
 
 return [
     'logger' => [
-        'file' => __DIR__.'/app.log',
+        'file' => __DIR__.'/../app.log',
         'mail' => [
             'to_address' => 'webmaster@domain.com',
             'from_address' => 'alerts@domain.com',
@@ -81,7 +82,7 @@ return [
 The container file just extracts the service and parameter definitions and passes them to the `Container` class constructor.
 
 ```PHP
-// config/container.php
+<?php // config/container.php
 use SitePoint\Container\Container;
 
 $services   = include __DIR__.'/services.php';
@@ -93,7 +94,9 @@ return new Container($services, $parameters);
 Now we can obtain the container in our app and use the logger service.
 
 ```PHP
-// app/file.php
+<?php // app/file.php
+
+require_once __DIR__.'/../vendor/autoload.php';
 
 $container = include __DIR__.'/../config/container.php';
 
