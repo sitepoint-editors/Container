@@ -2,6 +2,7 @@
 
 namespace SitePoint\Container;
 
+use Interop\Container\ContainerInterface;
 use SitePoint\Container\Exception\ContainerException;
 use SitePoint\Container\Exception\ParameterNotFoundException;
 use SitePoint\Container\Exception\ServiceNotFoundException;
@@ -11,7 +12,7 @@ use SitePoint\Container\Reference\ServiceReference;
 /**
  * A very simple dependency injection container.
  */
-class Container
+class Container implements ContainerInterface
 {
     /**
      * @var array
@@ -59,7 +60,7 @@ class Container
      */
     public function get($name)
     {
-        if (!isset($this->services[$name])) {
+        if (!$this->has($name)) {
             throw new ServiceNotFoundException('Service not found: '.$name);
         }
 
@@ -70,6 +71,18 @@ class Container
 
         // Return service from store
         return $this->serviceStore[$name];
+    }
+
+    /**
+     * Check to see if the container has a service.
+     *
+     * @param string $name The service name.
+     *
+     * @return bool True if the container has the service, false otherwise.
+     */
+    public function has($name)
+    {
+        return isset($this->services[$name]);
     }
 
     /**
