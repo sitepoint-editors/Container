@@ -4,9 +4,13 @@ A simple, easy to follow PHP dependency injection container. Designed to be fork
 
 # How To Use
 
+Although it isn't required to do so, a good practice is to split up the configuration for our container. In this example we'll use three files to create our container for the Monolog component.
+
+In the service definitions file, we define three services. The 'stream_handler' and 'mail_handler' services are created via constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The 'logger' service is instantiated via two calls to the 'pushHandler' method, each with a different handler service imported. 
 ```PHP
 // config/services.php
 
+// Value objects are used to reference parameters and services in the container
 use SitePoint\Container\Reference\ParameterReference;
 use SitePoint\Container\Reference\ServiceReference;
 
@@ -15,7 +19,7 @@ use Monolog\Handler\NativeMailerHandler;
 use Monolog\Handler\StreamHandler;
 
 return [
-    'steam_handler' => [
+    'stream_handler' => [
         'class' => StreamHandler::class,
         'arguments' => [
             new ParameterReference('logger.file'),
@@ -51,6 +55,8 @@ return [
 ];
 ```
 
+The parameters definitions file just returns an array of values. These are defined as an N-dimensional array, but they are accessed through references using the notation: `'logger.file'` or `'logger.mail.to_address'`.
+
 ```PHP
 // config/parameters.php
 
@@ -66,6 +72,8 @@ return [
 ];
 ```
 
+The container file just extracts the service and parameter definitions and passes them to the `Container` class constructor.
+
 ```PHP
 // config/container.php
 use SitePoint\Container\Container;
@@ -75,6 +83,8 @@ $parameters = include __DIR__.'/parameters.php';
 
 return new Container($services, $parameters);
 ```
+
+Now we can obtain the container in our app and use the logger service.
 
 ```PHP
 // app/file.php
