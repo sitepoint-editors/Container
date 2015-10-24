@@ -114,21 +114,27 @@ class Container
             throw new ContainerException($name.' service class does not exist: '.$entry['class']);
         }
 
-        $arguments = isset($entry['arguments']) ? $this->resolveServiceArguments($name, $entry['arguments']) : [];
+        $arguments = isset($entry['arguments']) ? $this->resolveArguments($name, $entry['arguments']) : [];
 
         $reflector = new \ReflectionClass($entry['class']);
-        return $reflector->newInstanceArgs($arguments);
+        $service = $reflector->newInstanceArgs($arguments);
+
+        if (isset($entry['calls'])) {
+            $this->initializeService($service, $name, $entry['calls']);
+        }
+
+        return $service;
     }
 
     /**
-     * Resolve the arguments of a service.
+     * Resolve argument definitions into an array of arguments.
      *
      * @param string $name                The service name.
      * @param array  $argumentDefinitions The service arguments definition.
      *
      * @return array The service constructor arguments.
      */
-    private function resolveServiceArguments($name, $argumentDefinitions)
+    private function resolveArguments($name, $argumentDefinitions)
     {
         $arguments = [];
 
@@ -151,5 +157,27 @@ class Container
         }
 
         return $arguments;
+    }
+
+    /**
+     * Initialize a service using the call definitions.
+     *
+     * @param string $service         The service.
+     * @param string $name            The service name.
+     * @param array  $callDefinitions The service calls definition.
+     */
+    private function initializeService($service, $name, $callDefinitions)
+    {
+        foreach ($callDefinitions as $callDefinition) {
+            if (!isset($callDefinition['method'])) {
+                throw new ContainerException($name.' service calls must all contain a \'method\' key');
+            } elseif (!is_callable([$service, $callDefinition['method']])) {
+                throw new ContainerException($name.' service asks for call to uncallable method: '.$callDefinition['method']);
+            }
+
+            $arguments = isset($callDefinition['arguments']) ? $this->resolveArguments($name, $callDefinition['arguments']) : [];
+
+            call_user_func_array([$service, $callDefinition['method']], $arguments);
+        }
     }
 }

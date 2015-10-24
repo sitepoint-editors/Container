@@ -41,6 +41,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
                     new ServiceReference('dependency'),
                     'foo',
                 ],
+                'calls' => [
+                    [
+                        'method' => 'setProperty',
+                        'arguments' => [
+                            new ParameterReference('group.param')
+                        ]
+                    ]
+                ]
             ],
             'dependency' => [
                 'class' => MockDependency::class,
@@ -74,6 +82,9 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         // Check the parameters have been loaded correctly
         $this->assertEquals('foo', $service->getParameter());
         $this->assertEquals('bar', $dependency->getParameter());
+
+        // Check the service calls have initialized
+        $this->assertEquals('bar', $service->getProperty());
     }
 
     // ERROR TESTING
@@ -133,6 +144,50 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $container->get('foo');
     }
+
+    /**
+     * @expectedException        SitePoint\Container\Exception\ContainerException
+     * @expectedExceptionMessage service calls must all contain a 'method' key
+     */
+    public function testNoMethod()
+    {
+        $container = new Container([
+            'foo' => [
+                'class' => MockDependency::class,
+                'arguments' => [
+                    'foo',
+                ],
+                'calls' => [
+                    ['bar'],
+                ],
+            ],
+        ]);
+
+        $container->get('foo');
+    }
+
+    /**
+     * @expectedException        SitePoint\Container\Exception\ContainerException
+     * @expectedExceptionMessage call to uncallable method
+     */
+    public function testUncallableMethod()
+    {
+        $container = new Container([
+            'foo' => [
+                'class' => MockDependency::class,
+                'arguments' => [
+                    'foo',
+                ],
+                'calls' => [
+                    [
+                        'method' => 'LALALALALA',
+                    ],
+                ],
+            ],
+        ]);
+
+        $container->get('foo');
+    }
 }
 
 // Mock classes for testing
@@ -141,6 +196,7 @@ class MockService
 {
     private $dependency;
     private $parameter;
+    private $property;
 
     public function __construct(MockDependency $dependency, $parameter)
     {
@@ -156,6 +212,16 @@ class MockService
     public function getParameter()
     {
         return $this->parameter;
+    }
+
+    public function setProperty($value)
+    {
+        $this->property = $value;
+    }
+
+    public function getProperty()
+    {
+        return $this->property;
     }
 }
 
