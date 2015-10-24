@@ -1,8 +1,8 @@
 # Container
 
-[![Build Status](https://travis-ci.org/php-diy/container.svg?branch=master)](https://travis-ci.org/php-diy/container)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-diy/container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/php-diy/container/?branch=master)
-[![Coverage Status](https://coveralls.io/repos/php-diy/container/badge.svg?branch=master&service=github)](https://coveralls.io/github/php-diy/container?branch=master)
+[![Build Status](https://travis-ci.org/sitepoint/container.svg?branch=master)](https://travis-ci.org/sitepoint/container)
+[![Coverage Status](https://coveralls.io/repos/sitepoint/Container/badge.svg?branch=master&service=github)](https://coveralls.io/github/sitepoint/Container?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sitepoint/Container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sitepoint/Container/?branch=master)
 
 A simple, easy to follow PHP dependency injection container. Designed to be forked, modified, extended and hacked.
 
