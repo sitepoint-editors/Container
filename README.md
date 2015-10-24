@@ -19,9 +19,9 @@ $parameters = [
     'logger' => [
         'file' => __DIR__.'/app.log',
         'mail' => [
-            'to_address'   => 'webmaster@domain.com',
+            'to_address' => 'webmaster@domain.com',
             'from_address' => 'alerts@domain.com',
-            'subject'      => 'App Logs',
+            'subject' => 'App Logs',
         ],
     ],
 ];
@@ -47,13 +47,13 @@ $services = [
         'class' => Logger::class,
         'calls' => [
             [
-                'method'    => 'pushHandler',
+                'method' => 'pushHandler',
                 'arguments' => [
                     new ServiceReference('stream_handler'),
                 ]
             ],
             [
-                'method'    => 'pushHandler',
+                'method' => 'pushHandler',
                 'arguments' => [
                     new ServiceReference('mail_handler'),
                 ]
