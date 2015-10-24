@@ -5,28 +5,16 @@ A simple, easy to follow PHP dependency injection container. Designed to be fork
 # How To Use
 
 ```PHP
-// Container Imports
-use SitePoint\Container\Container;
+// config/services.php
+
 use SitePoint\Container\Reference\ParameterReference;
 use SitePoint\Container\Reference\ServiceReference;
 
-// Service Imports
 use Monolog\Logger;
 use Monolog\Handler\NativeMailerHandler;
 use Monolog\Handler\StreamHandler;
 
-$parameters = [
-    'logger' => [
-        'file' => __DIR__.'/app.log',
-        'mail' => [
-            'to_address' => 'webmaster@domain.com',
-            'from_address' => 'alerts@domain.com',
-            'subject' => 'App Logs',
-        ],
-    ],
-];
-
-$services = [
+return [
     'steam_handler' => [
         'class' => StreamHandler::class,
         'arguments' => [
@@ -61,8 +49,37 @@ $services = [
         ]
     ]
 ];
+```
 
-$container = new Container($services, $parameters);
+```PHP
+// config/parameters.php
+
+return [
+    'logger' => [
+        'file' => __DIR__.'/app.log',
+        'mail' => [
+            'to_address' => 'webmaster@domain.com',
+            'from_address' => 'alerts@domain.com',
+            'subject' => 'App Logs',
+        ],
+    ],
+];
+```
+
+```PHP
+// config/container.php
+use SitePoint\Container\Container;
+
+$services   = include __DIR__.'/services.php';
+$parameters = include __DIR__.'/parameters.php';
+
+return new Container($services, $parameters);
+```
+
+```PHP
+// app/file.php
+
+$container = include __DIR__.'/../config/container.php';
 
 $logger = $container->get('logger');
 $logger->debug('This will be logged to the file');
