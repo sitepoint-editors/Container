@@ -2,7 +2,7 @@
 
 namespace SitePoint\Container;
 
-use Interop\Container\ContainerInterface;
+use Interop\Container\ContainerInterface as InteropContainerInterface;
 use SitePoint\Container\Exception\ContainerException;
 use SitePoint\Container\Exception\ParameterNotFoundException;
 use SitePoint\Container\Exception\ServiceNotFoundException;
@@ -12,7 +12,7 @@ use SitePoint\Container\Reference\ServiceReference;
 /**
  * A very simple dependency injection container.
  */
-class Container implements ContainerInterface
+class Container implements InteropContainerInterface
 {
     /**
      * @var array
