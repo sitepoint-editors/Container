@@ -5,7 +5,6 @@ namespace SitePoint\Container\Test;
 use SitePoint\Container\Container;
 use SitePoint\Container\Reference\ParameterReference;
 use SitePoint\Container\Reference\ServiceReference;
-use http\QueryString;
 
 class ContainerTest extends \PHPUnit_Framework_TestCase
 {
