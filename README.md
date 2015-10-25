@@ -1,7 +1,7 @@
 # Container
 
 [![Latest Stable Version](https://poser.pugx.org/sitepoint/container/v/stable)](https://packagist.org/packages/sitepoint/container)
-[![Build Status](https://travis-ci.org/sitepoint/container.svg?branch=master)](https://travis-ci.org/sitepoint/container)
+[![Build Status](https://travis-ci.org/sitepoint/Container.svg?branch=master)](https://travis-ci.org/sitepoint/Container)
 [![Coverage Status](https://coveralls.io/repos/sitepoint/Container/badge.svg?branch=master&service=github)](https://coveralls.io/github/sitepoint/Container?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sitepoint/Container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sitepoint/Container/?branch=master)
 [![Total Downloads](https://poser.pugx.org/sitepoint/container/downloads)](https://packagist.org/packages/sitepoint/container)[![License](https://poser.pugx.org/sitepoint/container/license)](https://packagist.org/packages/sitepoint/container)
