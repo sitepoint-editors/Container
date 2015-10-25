@@ -147,7 +147,7 @@ class Container implements InteropContainerInterface
      *
      * @return array The service constructor arguments.
      */
-    private function resolveArguments($name, $argumentDefinitions)
+    private function resolveArguments($name, array $argumentDefinitions)
     {
         $arguments = [];
 
@@ -179,7 +179,7 @@ class Container implements InteropContainerInterface
      * @param string $name            The service name.
      * @param array  $callDefinitions The service calls definition.
      */
-    private function initializeService($service, $name, $callDefinitions)
+    private function initializeService($service, $name, array $callDefinitions)
     {
         foreach ($callDefinitions as $callDefinition) {
             if (!is_array($callDefinition) || !isset($callDefinition['method'])) {

@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## master branch
 ### Added
-Nothing
+- The 'array' typehint to parameters on the `resolveArguments` and `initializeService` methods
 ### Changed
 - README example (cleanup)
 ### Removed
