@@ -32,7 +32,7 @@ class Container implements InteropContainerInterface
     /**
      * Constructor for the container.
      *
-     * Entrys into the $services array must be an associative array with a
+     * Entries into the $services array must be an associative array with a
      * 'class' key and an optional 'arguments' key. Where present the arguments
      * will be passed to the class constructor. If an argument is an instance of
      * ContainerService the argument will be replaced with the corresponding

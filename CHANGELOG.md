@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The 'array' typehint to parameters on the `resolveArguments` and `initializeService` methods
 ### Changed
 - README example (cleanup)
+- Spelling in container PHPDoc
 ### Removed
 - Unnecessary use declaration in container test
 
