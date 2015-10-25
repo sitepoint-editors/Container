@@ -85,6 +85,20 @@ return [
 
 The container file just extracts the service and parameter definitions and passes them to the `Container` class constructor.
 
+
+```PHP
+<?php // config/container.php
+
+use SitePoint\Container\Container;
+
+$services   = include __DIR__.'/services.php';
+$parameters = include __DIR__.'/parameters.php';
+
+return new Container($services, $parameters);
+```
+
+Now we can obtain the container in our app and use the logger service.
+
 ```PHP
 <?php // app/file.php
 
