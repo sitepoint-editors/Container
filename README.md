@@ -12,7 +12,10 @@ A simple, easy to follow PHP dependency injection container. Designed to be fork
 
 Although it isn't required to do so, a good practice is to split up the configuration for our container. In this example we'll use three files to create our container for the Monolog component.
 
-In the service definitions file, we define three services. All of the services require constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The logger service also requires two calls to the `pushHandler` method, each with a different handler service imported. 
+Another good practice is to use class and interface paths as service names. This provides a stricter naming convention that gives us more information about the services.
+
+In the service definitions file, we define three services. All of the services require constructor injection arguments. Some of these arguments are imported from the container parameters and some are defined directly. The logger service also requires two calls to the `pushHandler` method, each with a different handler service imported.
+
 ```PHP
 <?php // config/services.php
 
@@ -23,16 +26,17 @@ use SitePoint\Container\Reference\ServiceReference;
 use Monolog\Logger;
 use Monolog\Handler\NativeMailerHandler;
 use Monolog\Handler\StreamHandler;
+use Psr\Log\LoggerInterface;
 
 return [
-    'stream_handler' => [
+    StreamHandler::class => [
         'class' => StreamHandler::class,
         'arguments' => [
             new ParameterReference('logger.file'),
             Logger::DEBUG,
         ],
     ],
-    'mail_handler' => [
+    NativeMailHandler::class => [
         'class' => NativeMailerHandler::class,
         'arguments' => [
             new ParameterReference('logger.mail.to_address'),
@@ -41,20 +45,20 @@ return [
             Logger::ERROR,
         ],
     ],
-    'logger' => [
+    LoggerInterface::class => [
         'class' => Logger::class,
         'arguments' => [ 'channel-name' ],
         'calls' => [
             [
                 'method' => 'pushHandler',
                 'arguments' => [
-                    new ServiceReference('stream_handler'),
+                    new ServiceReference(StreamHandler::class),
                 ]
             ],
             [
                 'method' => 'pushHandler',
                 'arguments' => [
-                    new ServiceReference('mail_handler'),
+                    new ServiceReference(NativeMailHandler::class),
                 ]
             ]
         ]
@@ -82,26 +86,15 @@ return [
 The container file just extracts the service and parameter definitions and passes them to the `Container` class constructor.
 
 ```PHP
-<?php // config/container.php
-
-use SitePoint\Container\Container;
-
-$services   = include __DIR__.'/services.php';
-$parameters = include __DIR__.'/parameters.php';
-
-return new Container($services, $parameters);
-```
-
-Now we can obtain the container in our app and use the logger service.
-
-```PHP
 <?php // app/file.php
+
+use Psr\Log\LoggerInterface;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 $container = include __DIR__.'/../config/container.php';
 
-$logger = $container->get('logger');
+$logger = $container->get(LoggerInterface::class);
 $logger->debug('This will be logged to the file');
 $logger->error('This will be logged to the file and the email');
 ```
