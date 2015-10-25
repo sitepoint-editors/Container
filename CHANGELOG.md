@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - README example (cleanup)
 ### Removed
-Nothing
+- Unnecessary use declaration in container test
 
 ## 0.0.1 - 2015-10-24
 ### Added
