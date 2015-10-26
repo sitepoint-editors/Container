@@ -3,6 +3,7 @@ language: php
 php:
     - 5.5
     - 5.6
+    - 7.0
     - hhvm
 
 before_script:
@@ -14,5 +15,4 @@ script:
     - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-    - php vendor/bin/coveralls -v
-
+    - if [ $TRAVIS_PHP_VERSION = '5.6' ]; then php vendor/bin/coveralls -v; fi
