@@ -5,7 +5,8 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/sitepoint/Container/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sitepoint/Container/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sitepoint/Container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sitepoint/Container/?branch=master)
 [![Code Climate](https://codeclimate.com/github/sitepoint/Container/badges/gpa.svg)](https://codeclimate.com/github/sitepoint/Container)
-[![Total Downloads](https://poser.pugx.org/sitepoint/container/downloads)](https://packagist.org/packages/sitepoint/container)[![License](https://poser.pugx.org/sitepoint/container/license)](https://packagist.org/packages/sitepoint/container)
+[![Total Downloads](https://poser.pugx.org/sitepoint/container/downloads)](https://packagist.org/packages/sitepoint/container)
+[![License](https://poser.pugx.org/sitepoint/container/license)](https://packagist.org/packages/sitepoint/container)
 
 A simple, easy to follow PHP dependency injection container. Designed to be forked, modified, extended and hacked.
 
