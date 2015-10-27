@@ -7,10 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - The 'array' typehint to parameters on the `resolveArguments` and `initializeService` methods
 - Code climate badge
-- 
+- Scrutinizer configuration
+
 ### Changed
 - README example (cleanup)
 - Spelling in container PHPDoc
+- Switched from coveralls to scrutinizer
 
 ### Removed
 - Unnecessary use declaration in container test
