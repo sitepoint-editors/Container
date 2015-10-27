@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The 'array' typehint to parameters on the `resolveArguments` and `initializeService` methods
 - Code climate badge
 - Scrutinizer configuration
+- SitePoint logo to README
+- Authors section to README
 
 ### Changed
 - README example (cleanup)
