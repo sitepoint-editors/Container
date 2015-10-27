@@ -1,4 +1,4 @@
-# Container
+# ![SitePoint](https://avatars2.githubusercontent.com/u/15340853?v=3&s=40) Container
 
 [![Latest Stable Version](https://poser.pugx.org/sitepoint/container/v/stable)](https://packagist.org/packages/sitepoint/container)
 [![Build Status](https://travis-ci.org/sitepoint/Container.svg?branch=master)](https://travis-ci.org/sitepoint/Container)
