@@ -3,6 +3,7 @@ language: php
 php:
     - 5.5
     - 5.6
+    - 7.0
     - hhvm
 
 before_script:
@@ -11,8 +12,7 @@ before_script:
 
 script:
     - mkdir -p build/logs
-    - phpunit --coverage-clover build/logs/clover.xml
+    - phpunit --coverage-text --coverage-clover=build/logs/clover.xml --colors
 
 after_script:
-    - php vendor/bin/coveralls -v
-
+  - if [ $TRAVIS_PHP_VERSION = '5.6' ]; then wget https://scrutinizer-ci.com/ocular.phar; php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi
