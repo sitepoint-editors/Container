@@ -78,6 +78,10 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         // Check that the dependency has been reused
         $this->assertSame($dependency, $service->getDependency());
 
+        // Check the retrieval of container parameters
+        $this->assertTrue($container->hasParameter('group.param'));
+        $this->assertFalse($container->hasParameter('foo.bar'));
+
         // Check the parameters have been loaded correctly
         $this->assertEquals('foo', $service->getParameter());
         $this->assertEquals('bar', $dependency->getParameter());
