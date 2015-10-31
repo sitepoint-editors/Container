@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - The 'array' typehint to parameters on the `resolveArguments` and `initializeService` methods
 - ContainerInterface
+- `hasParameter` method on Container
 - Code climate badge
 - Scrutinizer configuration
 - SitePoint logo to README
