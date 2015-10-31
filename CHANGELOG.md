@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## master branch
 ### Added
 - The 'array' typehint to parameters on the `resolveArguments` and `initializeService` methods
+- ContainerInterface
 ### Changed
 - README example (cleanup)
 - Spelling in container PHPDoc
