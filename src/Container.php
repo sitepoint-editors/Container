@@ -2,7 +2,6 @@
 
 namespace SitePoint\Container;
 
-use Interop\Container\ContainerInterface as InteropContainerInterface;
 use SitePoint\Container\Exception\ContainerException;
 use SitePoint\Container\Exception\ParameterNotFoundException;
 use SitePoint\Container\Exception\ServiceNotFoundException;
@@ -12,7 +11,7 @@ use SitePoint\Container\Reference\ServiceReference;
 /**
  * A very simple dependency injection container.
  */
-class Container implements InteropContainerInterface
+class Container implements ContainerInterface
 {
     /**
      * @var array
@@ -52,11 +51,7 @@ class Container implements InteropContainerInterface
     }
 
     /**
-     * Retrieve a service from the container.
-     *
-     * @param string $name The service name.
-     *
-     * @return mixed The service.
+     * {@inheritDoc}
      */
     public function get($name)
     {
@@ -74,11 +69,7 @@ class Container implements InteropContainerInterface
     }
 
     /**
-     * Check to see if the container has a service.
-     *
-     * @param string $name The service name.
-     *
-     * @return bool True if the container has the service, false otherwise.
+     * {@inheritDoc}
      */
     public function has($name)
     {
@@ -86,11 +77,7 @@ class Container implements InteropContainerInterface
     }
 
     /**
-     * Retrieve a parameter from the container.
-     *
-     * @param string $name The parameter name.
-     *
-     * @return mixed The parameter.
+     * {@inheritDoc}
      */
     public function getParameter($name)
     {
@@ -109,13 +96,27 @@ class Container implements InteropContainerInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function hasParameter($name)
+    {
+        try {
+            $this->getParameter($name);
+        } catch (ParameterNotFoundException $exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Attempt to create a service.
      *
      * @param string $name The service name.
      *
      * @return mixed The created service.
      *
-     * @throws \Exception On failure.
+     * @throws ContainerException On failure.
      */
     private function createService($name)
     {
@@ -146,6 +147,8 @@ class Container implements InteropContainerInterface
      * @param array  $argumentDefinitions The service arguments definition.
      *
      * @return array The service constructor arguments.
+     *
+     * @throws ContainerException On failure.
      */
     private function resolveArguments($name, array $argumentDefinitions)
     {
@@ -178,6 +181,8 @@ class Container implements InteropContainerInterface
      * @param object $service         The service.
      * @param string $name            The service name.
      * @param array  $callDefinitions The service calls definition.
+     *
+     * @throws ContainerException On failure.
      */
     private function initializeService($service, $name, array $callDefinitions)
     {
