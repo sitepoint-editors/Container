@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - README example (cleanup)
 - Spelling in container PHPDoc
 - Switched from coveralls to scrutinizer
+- Mistake in .gitattributes file
 
 ### Removed
 - Unnecessary use declaration in container test
