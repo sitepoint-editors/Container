@@ -22,8 +22,8 @@ In the service definitions file, we define three services. All of the services r
 <?php // config/services.php
 
 // Value objects are used to reference parameters and services in the container
-use SitePoint\Container\Reference\ParameterReference;
-use SitePoint\Container\Reference\ServiceReference;
+use SitePoint\Container\Reference\ParameterReference as PR;
+use SitePoint\Container\Reference\ServiceReference as SR;
 
 use Monolog\Logger;
 use Monolog\Handler\NativeMailerHandler;
@@ -34,16 +34,16 @@ return [
     StreamHandler::class => [
         'class' => StreamHandler::class,
         'arguments' => [
-            new ParameterReference('logger.file'),
+            new PR('logger.file'),
             Logger::DEBUG,
         ],
     ],
     NativeMailHandler::class => [
         'class' => NativeMailerHandler::class,
         'arguments' => [
-            new ParameterReference('logger.mail.to_address'),
-            new ParameterReference('logger.mail.subject'),
-            new ParameterReference('logger.mail.from_address'),
+            new PR('logger.mail.to_address'),
+            new PR('logger.mail.subject'),
+            new PR('logger.mail.from_address'),
             Logger::ERROR,
         ],
     ],
@@ -54,13 +54,13 @@ return [
             [
                 'method' => 'pushHandler',
                 'arguments' => [
-                    new ServiceReference(StreamHandler::class),
+                    new SR(StreamHandler::class),
                 ]
             ],
             [
                 'method' => 'pushHandler',
                 'arguments' => [
-                    new ServiceReference(NativeMailHandler::class),
+                    new SR(NativeMailHandler::class),
                 ]
             ]
         ]
