@@ -120,13 +120,17 @@ class Container implements ContainerInterface
      */
     private function createService($name)
     {
-        $entry = $this->services[$name];
+        $entry = &$this->services[$name];
 
         if (!is_array($entry) || !isset($entry['class'])) {
             throw new ContainerException($name.' service entry must be an array containing a \'class\' key');
         } elseif (!class_exists($entry['class'])) {
             throw new ContainerException($name.' service class does not exist: '.$entry['class']);
+        } elseif (isset($entry['lock'])) {
+            throw new ContainerException($name.' contains circular reference');
         }
+
+        $entry['lock'] = true;
 
         $arguments = isset($entry['arguments']) ? $this->resolveArguments($name, $entry['arguments']) : [];
 
@@ -157,10 +161,6 @@ class Container implements ContainerInterface
         foreach ($argumentDefinitions as $argumentDefinition) {
             if ($argumentDefinition instanceof ServiceReference) {
                 $argumentServiceName = $argumentDefinition->getName();
-
-                if ($argumentServiceName === $name) {
-                    throw new ContainerException($name.' service contains a circular reference');
-                }
 
                 $arguments[] = $this->get($argumentServiceName);
             } elseif ($argumentDefinition instanceof ParameterReference) {

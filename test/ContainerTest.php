@@ -140,6 +140,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             'foo' => [
                 'class' => MockService::class,
                 'arguments' => [
+                    new ServiceReference('bar'),
+                ],
+            ],
+            'bar' => [
+                'class' => MockService::class,
+                'arguments' => [
                     new ServiceReference('foo'),
                 ],
             ],

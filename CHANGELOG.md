@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Spelling in container PHPDoc
 - Switched from coveralls to scrutinizer
 - Mistake in .gitattributes file
+- Fixed detection of circular references
 
 ### Removed
 - Unnecessary use declaration in container test
