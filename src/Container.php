@@ -132,7 +132,7 @@ class Container implements ContainerInterface
 
         $entry['lock'] = true;
 
-        $arguments = isset($entry['arguments']) ? $this->resolveArguments($name, $entry['arguments']) : [];
+        $arguments = isset($entry['arguments']) ? $this->resolveArguments($entry['arguments']) : [];
 
         $reflector = new \ReflectionClass($entry['class']);
         $service = $reflector->newInstanceArgs($arguments);
@@ -147,14 +147,13 @@ class Container implements ContainerInterface
     /**
      * Resolve argument definitions into an array of arguments.
      *
-     * @param string $name                The service name.
      * @param array  $argumentDefinitions The service arguments definition.
      *
      * @return array The service constructor arguments.
      *
      * @throws ContainerException On failure.
      */
-    private function resolveArguments($name, array $argumentDefinitions)
+    private function resolveArguments(array $argumentDefinitions)
     {
         $arguments = [];
 
@@ -193,7 +192,7 @@ class Container implements ContainerInterface
                 throw new ContainerException($name.' service asks for call to uncallable method: '.$callDefinition['method']);
             }
 
-            $arguments = isset($callDefinition['arguments']) ? $this->resolveArguments($name, $callDefinition['arguments']) : [];
+            $arguments = isset($callDefinition['arguments']) ? $this->resolveArguments($callDefinition['arguments']) : [];
 
             call_user_func_array([$service, $callDefinition['method']], $arguments);
         }
