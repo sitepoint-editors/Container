@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - Unnecessary use declaration in container test
+- Unnecessary parameter
 
 ## 0.0.1 - 2015-10-24
 
